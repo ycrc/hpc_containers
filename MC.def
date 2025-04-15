@@ -1,0 +1,22 @@
+Bootstrap:docker
+From: ubuntu:24.04
+
+%labels
+    Author research.computing@yale.edu
+    Version v0.0.1
+    URL https://research.computing.yale.edu/
+
+%files
+   MC.c /opt
+%post
+   echo "Setting up the Ubuntu container..."
+   apt-get update 
+   apt-get install -y build-essential gcc 
+   mkdir -p /opt/myapp
+   gcc /opt/MC.c -o /opt/myapp/MC
+   chmod +x /opt/myapp/MC
+
+%environment
+   export PATH=/opt/myapp/:$PATH
+
+
